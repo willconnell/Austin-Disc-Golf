@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Login Page</title>
+    <meta name="description" content="Homework 14">
+    <meta name="author" content="Will Connell">
+    <link rel="stylesheet" href="login.css">
+    </head>
+<body>
+    <div id='logo'>
+        <a href='phase3.html'><img src = "logo.png" height="100px"></a>
+    </div>
+    <div id='loginBox'>
+        <h3>Log In</h3>
+        <form method='POST' action="loginhandler.php">
+        <input type='text' name = 'username' id = 'username' placeholder='Username'><br>
+        <input type='password' name = 'password' id='password' placeholder='Password'><br>
+        <input type='submit' value='Log In'>
+        </form>
+        <p>Don't have an account? <a href='register.html'>Create one.</a></p>
+    </div>
+
+
+    <script>
+        function ajaxFunction(server,user,pwd,dbName){
+            var ajaxRequest;
+            
+            ajaxRequest = new XMLHttpRequest();
+            
+            // Create a function that will receive data sent from the server and will update
+            // the div section in the same page.
+            
+            ajaxRequest.onreadystatechange = function(){
+                if(ajaxRequest.readyState == 4){
+                    var ajaxDisplay = document.getElementById('ajaxDiv');
+                    ajaxDisplay.innerHTML = ajaxRequest.responseText;
+                }
+            }
+            
+            // Now get the value from user and pass it to server script.
+            
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var queryString = "?username=" + username;
+            
+            queryString +=  "&username=" + username + "&password=" + password;
+            
+            ajaxRequest.open("GET", "ajaxhandler.php" + queryString, true);
+            ajaxRequest.send();
+        }
+    </script>
+</body>
+</html>
+
+
+
